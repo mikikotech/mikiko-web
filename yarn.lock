@@ -1042,13 +1042,6 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.7.6":
-  version "7.19.0"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.19.0.tgz#22b11c037b094d27a8a2504ea4dcff00f50e2259"
-  integrity sha512-eR8Lo9hnDS7tqkO7NsV+mKvCmv5boaXFSZ70DnfhcgiEne8hv9oCEd36Klw74EtizEqLsy4YnW8UWwpBVolHZA==
-  dependencies:
-    regenerator-runtime "^0.13.4"
-
 "@babel/template@^7.18.10", "@babel/template@^7.18.6", "@babel/template@^7.3.3":
   version "7.18.10"
   resolved "https://registry.npmjs.org/@babel/template/-/template-7.18.10.tgz"
@@ -2091,7 +2084,7 @@
 
 "@mui/icons-material@^5.10.3":
   version "5.10.3"
-  resolved "https://registry.yarnpkg.com/@mui/icons-material/-/icons-material-5.10.3.tgz#33bd1d973c4727ab55d02928fc8973b7f16fff55"
+  resolved "https://registry.npmjs.org/@mui/icons-material/-/icons-material-5.10.3.tgz"
   integrity sha512-o0kbUlsWCBtCE0wP33cGKbyryCh7kpm2EECYMPDmWrLhbA+HUODXIdhiTFS26szp2xXo9HY1lEx0ufeJ+tddYw==
   dependencies:
     "@babel/runtime" "^7.18.9"
@@ -2283,6 +2276,11 @@
   version "2.0.1"
   resolved "https://registry.npmjs.org/@react-leaflet/core/-/core-2.0.1.tgz"
   integrity sha512-XGmx01DovDt0IWsW4tqeuSYifpY19aUn9NYCqTBI3KNtjbCjj0pfiWa7krNsnJ6l2oQbv4Nt0/BabLbIvT4ocA==
+
+"@remix-run/router@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.0.0.tgz"
+  integrity sha512-SCR1cxRSMNKjaVYptCzBApPDqGwa3FGdjVHc+rOToocNPHQdIYLZBfv/3f+KvYuXDkUGVIW9IAzmPNZDRL1I4A==
 
 "@rollup/plugin-babel@^5.2.0":
   version "5.3.1"
@@ -3372,6 +3370,14 @@ axe-core@^4.4.3:
   resolved "https://registry.npmjs.org/axe-core/-/axe-core-4.4.3.tgz"
   integrity sha512-32+ub6kkdhhWick/UjvEwRchgoetXqTK14INLqbGm5U2TzBkBNF3nQtLYm8ovxSkQWArjEQvftCKryjZaATu3w==
 
+axios@^0.27.2:
+  version "0.27.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.27.2.tgz#207658cc8621606e586c85db4b41a750e756d972"
+  integrity sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==
+  dependencies:
+    follow-redirects "^1.14.9"
+    form-data "^4.0.0"
+
 axobject-query@^2.2.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/axobject-query/-/axobject-query-2.2.0.tgz"
@@ -4016,6 +4022,11 @@ crypto-random-string@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/crypto-random-string/-/crypto-random-string-2.0.0.tgz"
   integrity sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
+
+crypto@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/crypto/-/crypto-1.0.1.tgz#2af1b7cad8175d24c8a1b0778255794a21803037"
+  integrity sha512-VxBKmeNcqQdiUQUW2Tzq0t377b54N2bMtXO/qiLa+6eRRmmC4qT3D4OnTGoT/U6O9aklQ/jTwbOtRMTTY8G0Ig==
 
 css-blank-pseudo@^3.0.3:
   version "3.0.3"
@@ -5190,6 +5201,11 @@ follow-redirects@^1.0.0:
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.1.tgz"
   integrity sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==
 
+follow-redirects@^1.14.9:
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
+  integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
+
 fork-ts-checker-webpack-plugin@^6.5.0:
   version "6.5.2"
   resolved "https://registry.npmjs.org/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-6.5.2.tgz"
@@ -5213,6 +5229,15 @@ form-data@^3.0.0:
   version "3.0.1"
   resolved "https://registry.npmjs.org/form-data/-/form-data-3.0.1.tgz"
   integrity sha512-RHkBKtLWUVwd7SqRIvCZMEvAMoGUp0XU+seQiZejj0COz3RI3hWP4sCv3gZWWLjJTd7rGwcsF5eKZGii0r/hbg==
+  dependencies:
+    asynckit "^0.4.0"
+    combined-stream "^1.0.8"
+    mime-types "^2.1.12"
+
+form-data@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/form-data/-/form-data-4.0.0.tgz#93919daeaf361ee529584b9b31664dc12c9fa452"
+  integrity sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==
   dependencies:
     asynckit "^0.4.0"
     combined-stream "^1.0.8"
@@ -5477,13 +5502,6 @@ he@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/he/-/he-1.2.0.tgz"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
-
-history@^5.2.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/history/-/history-5.3.0.tgz#1548abaa245ba47992f063a0783db91ef201c73b"
-  integrity sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==
-  dependencies:
-    "@babel/runtime" "^7.7.6"
 
 hoist-non-react-statics@^3.3.1:
   version "3.3.2"
@@ -8115,6 +8133,13 @@ qs@6.10.3:
   dependencies:
     side-channel "^1.0.4"
 
+qs@^6.11.0:
+  version "6.11.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.0.tgz#fd0d963446f7a65e1367e01abd85429453f0c37a"
+  integrity sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==
+  dependencies:
+    side-channel "^1.0.4"
+
 querystringify@^2.1.1:
   version "2.2.0"
   resolved "https://registry.npmjs.org/querystringify/-/querystringify-2.2.0.tgz"
@@ -8171,10 +8196,22 @@ react-app-polyfill@^3.0.0:
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
 
+react-app-rewired@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-app-rewired/-/react-app-rewired-2.2.1.tgz#84901ee1e3f26add0377ebec0b41bcdfce9fc211"
+  integrity sha512-uFQWTErXeLDrMzOJHKp0h8P1z0LV9HzPGsJ6adOtGlA/B9WfT6Shh4j2tLTTGlXOfiVx6w6iWpp7SOC5pvk+gA==
+  dependencies:
+    semver "^5.6.0"
+
 react-chartjs-2@^4.3.1:
   version "4.3.1"
   resolved "https://registry.npmjs.org/react-chartjs-2/-/react-chartjs-2-4.3.1.tgz"
   integrity sha512-5i3mjP6tU7QSn0jvb8I4hudTzHJqS8l00ORJnVwI2sYu0ihpj83Lv2YzfxunfxTZkscKvZu2F2w9LkwNBhj6xA==
+
+react-circular-progressbar@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-circular-progressbar/-/react-circular-progressbar-2.1.0.tgz#99e5ae499c21de82223b498289e96f66adb8fa3a"
+  integrity sha512-xp4THTrod4aLpGy68FX/k1Q3nzrfHUjUe5v6FsdwXBl3YVMwgeXYQKDrku7n/D6qsJA9CuunarAboC2xCiKs1g==
 
 react-dev-utils@^12.0.1:
   version "12.0.1"
@@ -8247,19 +8284,18 @@ react-refresh@^0.11.0:
   integrity sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==
 
 react-router-dom@6:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.3.0.tgz#a0216da813454e521905b5fa55e0e5176123f43d"
-  integrity sha512-uaJj7LKytRxZNQV8+RbzJWnJ8K2nPsOOEuX7aQstlMZKQT0164C+X2w6bnkqU3sjtLvpd5ojrezAyfZ1+0sStw==
+  version "6.4.0"
+  resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.4.0.tgz"
+  integrity sha512-4Aw1xmXKeleYYQ3x0Lcl2undHR6yMjXZjd9DKZd53SGOYqirrUThyUb0wwAX5VZAyvSuzjNJmZlJ3rR9+/vzqg==
   dependencies:
-    history "^5.2.0"
-    react-router "6.3.0"
+    react-router "6.4.0"
 
-react-router@6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.3.0.tgz#3970cc64b4cb4eae0c1ea5203a80334fdd175557"
-  integrity sha512-7Wh1DzVQ+tlFjkeo+ujvjSqSJmkt1+8JO+T5xklPlgrh70y7ogx75ODRW0ThWhY7S+6yEDks8TYrtQe/aoboBQ==
+react-router@6.4.0:
+  version "6.4.0"
+  resolved "https://registry.npmjs.org/react-router/-/react-router-6.4.0.tgz"
+  integrity sha512-B+5bEXFlgR1XUdHYR6P94g299SjrfCBMmEDJNcFbpAyRH1j1748yt9NdDhW3++nw1lk3zQJ6aOO66zUx3KlTZg==
   dependencies:
-    history "^5.2.0"
+    "@remix-run/router" "1.0.0"
 
 react-scripts@5.0.1:
   version "5.0.1"
@@ -8683,6 +8719,11 @@ semver@7.0.0:
   version "7.0.0"
   resolved "https://registry.npmjs.org/semver/-/semver-7.0.0.tgz"
   integrity sha512-+GB6zVA9LWh6zovYQLALHwv5rb2PHGlJi3lfiqIHxR0uuwCgefcOJc59v9fv1w8GbStwxuuqqAjI9NMAOOgq1A==
+
+semver@^5.6.0:
+  version "5.7.1"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
+  integrity sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==
 
 semver@^6.0.0, semver@^6.1.1, semver@^6.1.2, semver@^6.3.0:
   version "6.3.0"

@@ -8,8 +8,9 @@ import { collection, getDocs } from "firebase/firestore/lite";
 import { ref, onValue } from "firebase/database";
 import logopin from "./logopin.png";
 import logopinshadow from "./logopinshadow.png";
-import { Stack, Typography } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const icon = new Icon({
   iconUrl: logopin,
@@ -60,6 +61,19 @@ const MapPage = () => {
 
   return (
     <div style={{ width: "100vw", height: "92vh", marginTop: "8vh" }}>
+      {/* <Button
+        onClick={() => {
+          axios
+            .get(
+              "http://192.168.100.71:3000/tuya/getdevice/az1657567241035Oe8vm/eb944aaa9f8e66df2e0lxf"
+            )
+            .then((res) => {
+              console.log(res);
+            });
+        }}
+      >
+        test
+      </Button> */}
       <MapContainer
         center={[pos.lat, pos.lng]}
         zoom={10}
