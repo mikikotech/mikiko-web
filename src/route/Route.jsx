@@ -1,16 +1,20 @@
-import { Container, Typography, useTheme } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
+import { BrowserRouter, Routes, Route as Router } from "react-router-dom";
 import Header from "../components/Header";
-import MapPage from "./../pages/HomePage/MapPage";
+import DetailPage from "../pages/HomePage/DetailPage";
+import ErrorPage from "../pages/HomePage/ErrorPage";
+import MainPage from "../pages/HomePage/MainPage";
 
 const Route = () => {
-  const theme = useTheme();
-
   return (
-    <div>
+    <BrowserRouter>
       <Header />
-      <MapPage />
-    </div>
+      <Routes>
+        <Router path="/" element={<MainPage />} />
+        <Router path="/detail/:devId" element={<DetailPage />} />
+        <Router path="*" element={<ErrorPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

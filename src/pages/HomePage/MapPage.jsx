@@ -2,46 +2,14 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
+import InsertLinkIcon from "@mui/icons-material/InsertLink";
 import { db, database } from "./../../utils/firebase-config";
 import { collection, getDocs } from "firebase/firestore/lite";
-import { ref, onValue, limitToLast, query } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 import logopin from "./logopin.png";
 import logopinshadow from "./logopinshadow.png";
-import { Typography } from "@mui/material";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "Chart.js Line Chart",
-    },
-  },
-};
+import { Stack, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const icon = new Icon({
   iconUrl: logopin,
@@ -52,6 +20,7 @@ const icon = new Icon({
 
 const MapPage = () => {
   const [device, deviceSet] = useState([]);
+  const [deviceRLDB, deviceRLDBSet] = useState([]);
   const pos = { lat: -8.340539, lng: 115.091949 };
 
   const getDevices = async () => {
@@ -61,11 +30,32 @@ const MapPage = () => {
       dev.push(doc.data());
     });
 
+    dev.map(async (res, i) => {
+      const rldb = await ref(database, `${res.id}/data`);
+      onValue(rldb, (resp) => {
+        deviceRLDBSet((oldVal) => {
+          const copy = [...oldVal];
+
+          copy[i] = {
+            id: res.id,
+            humi: resp?.val()?.humi,
+            temp: resp?.val()?.temp,
+            soil: resp?.val()?.soil,
+            ph: resp?.val()?.ph,
+          };
+
+          return copy;
+        });
+      });
+    });
+
     deviceSet(dev);
   };
 
   useEffect(() => {
     getDevices();
+
+    console.log(deviceRLDB);
   }, []);
 
   return (
@@ -73,32 +63,18 @@ const MapPage = () => {
       <MapContainer
         center={[pos.lat, pos.lng]}
         zoom={10}
-        scrollWheelZoom={false}
+        scrollWheelZoom={true}
         style={{ height: "100%", width: "100%" }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {device.map((doc) => {
+        {device.map((doc, i) => {
           // console.log(doc.geoPoint);
           // const rldb = ref(database, `${doc.id}/Sensor`);
 
-          var humi = 0;
-          var temp = 0;
-          var soil = 0;
-          var ph = 0;
-          const rldb = ref(database, `${doc.id}/data`);
-          onValue(rldb, (res) => {
-            const data = res.val();
-            if (data != null) {
-              humi = res.val().humi;
-              temp = res.val().temp;
-              soil = res.val().soil;
-              ph = res.val().ph;
-            }
-            console.log(temp);
-          });
+          // console.log(deviceRLDB[i]?.id);
 
           return (
             <Marker
@@ -120,16 +96,41 @@ const MapPage = () => {
                   {" "}
                   Device Location = {doc.location}
                 </Typography>
-                <Typography variant="caption"> Temperature = {temp}</Typography>
-                <br />
-                <Typography variant="caption"> Humidity = {humi}</Typography>
-                <br />
-                <Typography variant="caption">
-                  {" "}
-                  Soil Moisture = {soil}
-                </Typography>
-                <br />
-                <Typography variant="caption"> Soil PH = {ph}</Typography>
+                {doc.model == "5CH" ? (
+                  <>
+                    <br />
+                    <br />
+                    <Typography variant="caption">
+                      {" "}
+                      Temperature = {deviceRLDB[i]?.temp}
+                    </Typography>
+                    <br />
+                    <Typography variant="caption">
+                      {" "}
+                      Humidity = {deviceRLDB[i]?.humi}
+                    </Typography>
+                    <br />
+                    <Typography variant="caption">
+                      {" "}
+                      Soil Moisture = {deviceRLDB[i]?.soil}
+                    </Typography>
+                    <br />
+                    <Typography variant="caption">
+                      {" "}
+                      Soil PH = {deviceRLDB[i]?.ph}
+                    </Typography>
+                    <br />
+                    <br />
+                    <Link to={`/detail/${doc.id}`}>
+                      <Stack direction="row" alignItems="center" gap={1}>
+                        <Typography variant="subtitle2">See Details</Typography>
+                        <InsertLinkIcon
+                          style={{ height: "20px", width: "20px" }}
+                        />
+                      </Stack>
+                    </Link>
+                  </>
+                ) : null}
               </Popup>
             </Marker>
           );
