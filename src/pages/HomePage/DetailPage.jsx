@@ -47,6 +47,7 @@ const DetailPage = () => {
   const [humi, setHumi] = useState([]);
   const [soil, setSoil] = useState([]);
   const [ph, setPh] = useState([]);
+  const [deviceRLDB, deviceRLDBSet] = useState([]);
   const [time, setTime] = useState([]);
 
   const servers = {
@@ -76,22 +77,54 @@ const DetailPage = () => {
 
       for (let id in data) {
         tempArray.push(data[id].temp);
-        humiArray.push(data[id].hum);
+        humiArray.push(data[id].humi);
         soilArray.push(data[id].soil);
         phArray.push(data[id].ph);
         timeArray.push(data[id].time);
       }
 
+      setTime((oldVal) => {
+        var copy = [...oldVal];
+
+        timeArray.map((val, i) => {
+          console.log("time", val);
+          copy[i] = new Date(val * 1000).toLocaleTimeString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+        });
+
+        return copy;
+      });
+
       setTemp(tempArray);
       setHumi(humiArray);
       setSoil(soilArray);
       setPh(phArray);
-      setTime(timeArray);
+    });
+  };
+
+  const getRTDB = async () => {
+    const rldb = await ref(database, `${devId}/data`);
+    onValue(rldb, (resp) => {
+      console.log("realtime", resp.val());
+      deviceRLDBSet((oldVal) => {
+        const copy = [...oldVal];
+
+        copy[0] = resp?.val()?.temp;
+        copy[1] = resp?.val()?.humi;
+        copy[2] = resp?.val()?.soil;
+        copy[3] = resp?.val()?.ph;
+
+        return copy;
+      });
     });
   };
 
   useEffect(() => {
     getData();
+
+    getRTDB();
 
     const peerListener = peerConnection.addEventListener(
       "icecandidate",
@@ -106,13 +139,20 @@ const DetailPage = () => {
   }, []);
 
   return (
-    <div style={{ marginTop: "8vh" }}>
+    <div style={{ marginTop: "8vh", backgroundColor: "#1f272b" }}>
       <h1>Detail page</h1>
 
       <Stack direction="row">
-        <Stack>
-          {temp.length > 1 ? (
-            <div style={{ width: "60vh", height: "40vh" }}>
+        <Stack marginLeft={3} gap={1}>
+          {temp.length >= 1 ? (
+            <div
+              style={{
+                width: "60vh",
+                height: "40vh",
+                backgroundColor: "#0e1214",
+                borderRadius: "20px",
+              }}
+            >
               <Line
                 options={options}
                 data={{
@@ -121,16 +161,47 @@ const DetailPage = () => {
                     {
                       label: "Temperature",
                       data: temp,
-                      borderColor: "rgb(255, 99, 132)",
-                      backgroundColor: "rgba(255, 99, 132, 0.5)",
+                      borderColor: "#169b7e",
+                      backgroundColor: "#169b7e",
                     },
                   ],
                 }}
               />
             </div>
-          ) : null}
-          {humi.length > 1 ? (
-            <div style={{ width: "60vh", height: "40vh" }}>
+          ) : (
+            <div
+              style={{
+                width: "60vh",
+                height: "40vh",
+                backgroundColor: "#0e1214",
+                borderRadius: "20px",
+              }}
+            >
+              <Line
+                options={options}
+                data={{
+                  labels: ["00:00"],
+                  datasets: [
+                    {
+                      label: "Temperature",
+                      data: [0],
+                      borderColor: "#169b7e",
+                      backgroundColor: "#169b7e",
+                    },
+                  ],
+                }}
+              />
+            </div>
+          )}
+          {humi.length >= 1 ? (
+            <div
+              style={{
+                width: "60vh",
+                height: "40vh",
+                backgroundColor: "#0e1214",
+                borderRadius: "20px",
+              }}
+            >
               <Line
                 options={options}
                 data={{
@@ -139,18 +210,49 @@ const DetailPage = () => {
                     {
                       label: "Humidity",
                       data: humi,
-                      borderColor: "rgb(255, 99, 132)",
-                      backgroundColor: "rgba(255, 99, 132, 0.5)",
+                      borderColor: "#169b7e",
+                      backgroundColor: "#169b7e",
                     },
                   ],
                 }}
               />
             </div>
-          ) : null}
+          ) : (
+            <div
+              style={{
+                width: "60vh",
+                height: "40vh",
+                backgroundColor: "#0e1214",
+                borderRadius: "20px",
+              }}
+            >
+              <Line
+                options={options}
+                data={{
+                  labels: ["00:00"],
+                  datasets: [
+                    {
+                      label: "Humidity",
+                      data: [0],
+                      borderColor: "#169b7e",
+                      backgroundColor: "#169b7e",
+                    },
+                  ],
+                }}
+              />
+            </div>
+          )}
         </Stack>
-        <Stack>
-          {soil.length > 1 ? (
-            <div style={{ width: "60vh", height: "40vh" }}>
+        <Stack marginLeft={1} gap={1}>
+          {soil.length >= 1 ? (
+            <div
+              style={{
+                width: "60vh",
+                height: "40vh",
+                backgroundColor: "#0e1214",
+                borderRadius: "20px",
+              }}
+            >
               <Line
                 options={options}
                 data={{
@@ -159,16 +261,47 @@ const DetailPage = () => {
                     {
                       label: "Soil Moisture",
                       data: soil,
-                      borderColor: "rgb(255, 99, 132)",
-                      backgroundColor: "rgba(255, 99, 132, 0.5)",
+                      borderColor: "#169b7e",
+                      backgroundColor: "#169b7e",
                     },
                   ],
                 }}
               />
             </div>
-          ) : null}
-          {ph.length > 1 ? (
-            <div style={{ width: "60vh", height: "40vh" }}>
+          ) : (
+            <div
+              style={{
+                width: "60vh",
+                height: "40vh",
+                backgroundColor: "#0e1214",
+                borderRadius: "20px",
+              }}
+            >
+              <Line
+                options={options}
+                data={{
+                  labels: ["00:00"],
+                  datasets: [
+                    {
+                      label: "Soil Moisture",
+                      data: [0],
+                      borderColor: "#169b7e",
+                      backgroundColor: "#169b7e",
+                    },
+                  ],
+                }}
+              />
+            </div>
+          )}
+          {ph.length >= 1 ? (
+            <div
+              style={{
+                width: "60vh",
+                height: "40vh",
+                backgroundColor: "#0e1214",
+                borderRadius: "20px",
+              }}
+            >
               <Line
                 options={options}
                 data={{
@@ -177,29 +310,53 @@ const DetailPage = () => {
                     {
                       label: "Soil PH",
                       data: ph,
-                      borderColor: "rgb(255, 99, 132)",
-                      backgroundColor: "rgba(255, 99, 132, 0.5)",
+                      borderColor: "#169b7e",
+                      backgroundColor: "#169b7e",
                     },
                   ],
                 }}
               />
             </div>
-          ) : null}
+          ) : (
+            <div
+              style={{
+                width: "60vh",
+                height: "40vh",
+                backgroundColor: "#0e1214",
+                borderRadius: "20px",
+              }}
+            >
+              <Line
+                options={options}
+                data={{
+                  labels: ["00:00"],
+                  datasets: [
+                    {
+                      label: "Soil PH",
+                      data: [0],
+                      borderColor: "#169b7e",
+                      backgroundColor: "#169b7e",
+                    },
+                  ],
+                }}
+              />
+            </div>
+          )}
         </Stack>
 
-        <Stack gap={8} marginLeft={10}>
+        <Stack gap={8} marginLeft={5}>
           <div style={{ width: "30vh", height: "30vh" }}>
             <Typography variant="subtitle2">Temperature</Typography>
             <CircularProgressbar
               maxValue={60}
-              value={temp[temp.length - 1]}
-              text={`${temp[temp.length - 1]}°C`}
+              value={deviceRLDB[0]}
+              text={`${deviceRLDB[0]}°C`}
               styles={buildStyles({
                 strokeLinecap: "butt",
                 textSize: "16px",
                 pathTransitionDuration: 0.5,
-                pathColor: `rgb(255, 99, 132)`,
-                textColor: "rgb(255, 99, 132)",
+                pathColor: `#169b7e`,
+                textColor: "#169b7e",
                 trailColor: "#d6d6d6",
                 backgroundColor: "#3e98c7",
               })}
@@ -208,14 +365,14 @@ const DetailPage = () => {
           <div style={{ width: "30vh", height: "30vh" }}>
             <Typography variant="subtitle2">Humidity</Typography>
             <CircularProgressbar
-              value={humi[humi.length - 1]}
-              text={`${humi[humi.length - 1]}%`}
+              value={deviceRLDB[1]}
+              text={`${deviceRLDB[1]}%`}
               styles={buildStyles({
                 strokeLinecap: "butt",
                 textSize: "16px",
                 pathTransitionDuration: 0.5,
-                pathColor: `rgb(255, 99, 132)`,
-                textColor: "rgb(255, 99, 132)",
+                pathColor: `#169b7e`,
+                textColor: "#169b7e",
                 trailColor: "#d6d6d6",
                 backgroundColor: "#3e98c7",
               })}
@@ -227,14 +384,14 @@ const DetailPage = () => {
           <div style={{ width: "30vh", height: "30vh" }}>
             <Typography variant="subtitle2">Soil Moisture</Typography>
             <CircularProgressbar
-              value={soil[soil.length - 1]}
-              text={`${soil[soil.length - 1]}%`}
+              value={deviceRLDB[2]}
+              text={`${deviceRLDB[2]}%`}
               styles={buildStyles({
                 strokeLinecap: "butt",
                 textSize: "16px",
                 pathTransitionDuration: 0.5,
-                pathColor: `rgb(255, 99, 132)`,
-                textColor: "rgb(255, 99, 132)",
+                pathColor: `#169b7e`,
+                textColor: "#169b7e",
                 trailColor: "#d6d6d6",
                 backgroundColor: "#3e98c7",
               })}
@@ -243,15 +400,15 @@ const DetailPage = () => {
           <div style={{ width: "30vh", height: "30vh" }}>
             <Typography variant="subtitle2">Soil PH</Typography>
             <CircularProgressbar
-              value={ph[ph.length - 1]}
+              value={Number(Number(deviceRLDB[3])).toFixed(2)}
               maxValue={14}
-              text={`${ph[ph.length - 1]}`}
+              text={`${Number(Number(deviceRLDB[3])).toFixed(2)}`}
               styles={buildStyles({
                 strokeLinecap: "butt",
                 textSize: "16px",
                 pathTransitionDuration: 0.5,
-                pathColor: `rgb(255, 99, 132)`,
-                textColor: "rgb(255, 99, 132)",
+                pathColor: `#169b7e`,
+                textColor: "#169b7e",
                 trailColor: "#d6d6d6",
                 backgroundColor: "#3e98c7",
               })}
