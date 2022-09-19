@@ -1,9 +1,11 @@
 import "./App.css";
 import React from "react";
 import { colors, CssBaseline, ThemeProvider } from "@mui/material";
-import { createTheme, useTheme } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import { green } from "@mui/material/colors";
 import Route from "./route/Route";
+import LoginPage from "./pages/AuthPage/LoginPage";
+import RegisterPage from "./pages/AuthPage/RegisterPage";
 
 const theme = createTheme({
   palette: {
@@ -23,11 +25,12 @@ const theme = createTheme({
 });
 
 const App = () => {
-  const tema = useTheme();
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Route />
+      {/* <Route /> */}
+      <LoginPage />
+      {/* <RegisterPage /> */}
     </ThemeProvider>
   );
 };
